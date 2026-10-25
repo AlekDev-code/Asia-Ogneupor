@@ -1,0 +1,8 @@
+# Служебные файлы ОС и редакторов
+Thumbs.db
+Desktop.ini
+.DS_Store
+.vscode/
+
+# Секреты
+.env

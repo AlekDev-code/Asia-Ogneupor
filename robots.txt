@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# [ЗАГЛУШКА: заменить example.kz на настоящий домен]
+Sitemap: https://example.kz/sitemap.xml

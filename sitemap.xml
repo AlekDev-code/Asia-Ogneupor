@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [ЗАГЛУШКА: заменить example.kz на настоящий домен] -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://example.kz/</loc></url>
+  <url><loc>https://example.kz/services.html</loc></url>
+  <url><loc>https://example.kz/projects.html</loc></url>
+  <url><loc>https://example.kz/contacts.html</loc></url>
+</urlset>
