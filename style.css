@@ -22,7 +22,9 @@
   --header-h: 68px;
   --section-pad: 64px;
   --shadow: 0 8px 24px rgba(28, 31, 35, 0.08);
-  --transition: 0.2s ease;
+  /* Плавная «выезжающая» кривая для всех анимаций */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --transition: 0.35s var(--ease);
 }
 
 @media (min-width: 768px) {
@@ -69,6 +71,7 @@ img {
 a {
   color: inherit;
   text-decoration: none;
+  transition: color var(--transition);
 }
 
 ul,
@@ -129,11 +132,12 @@ textarea {
   line-height: 1.2;
   text-align: center;
   cursor: pointer;
-  transition: background-color var(--transition), color var(--transition), border-color var(--transition);
+  transition: background-color var(--transition), color var(--transition), border-color var(--transition),
+    box-shadow var(--transition), transform 0.15s var(--ease);
 }
 
 .btn:active {
-  transform: translateY(1px);
+  transform: scale(0.97);
 }
 
 .btn--lg {
@@ -195,6 +199,13 @@ textarea {
   z-index: 100;
   background-color: var(--color-white);
   border-bottom: 1px solid var(--color-border);
+  transition: box-shadow var(--transition), border-color var(--transition);
+}
+
+/* После начала прокрутки шапка мягко «отрывается» от контента */
+.header.is-scrolled {
+  border-bottom-color: transparent;
+  box-shadow: 0 4px 20px rgba(28, 31, 35, 0.08);
 }
 
 .header__inner {
@@ -623,18 +634,52 @@ textarea {
   }
 }
 
+@media (min-width: 1024px) {
+  .cards--4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Метки-«теги» (агрегаты, материалы) */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+  margin-top: 32px;
+}
+
+.tags__title {
+  font-weight: 700;
+}
+
+.tags__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+}
+
 .card {
   padding: 28px;
   background-color: var(--color-white);
   border: 1px solid var(--color-border);
   border-top: 3px solid var(--color-accent);
   border-radius: var(--radius);
-  transition: box-shadow var(--transition), transform var(--transition);
+  transition: box-shadow 0.45s var(--ease), transform 0.45s var(--ease);
 }
 
 .card:hover {
   box-shadow: var(--shadow);
-  transform: translateY(-2px);
+  transform: translateY(-4px);
 }
 
 .card--placeholder {
@@ -728,8 +773,15 @@ textarea {
 }
 
 .project__media {
+  display: block;
   aspect-ratio: 4 / 3;
   background-color: var(--color-gray);
+}
+
+.project__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .project__media--placeholder {
@@ -766,31 +818,52 @@ textarea {
 }
 
 /* ===== Клиенты и отзывы ===== */
+/* Флекс с центровкой: неполный последний ряд встаёт по центру, а не прилипает влево */
 .clients {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 16px;
-  margin-bottom: 40px;
-}
-
-@media (min-width: 768px) {
-  .clients {
-    grid-template-columns: repeat(4, 1fr);
-  }
 }
 
 .clients__item {
+  flex: 0 0 calc((100% - 16px) / 2);
+  /* Длинные названия не должны раздвигать плитку и ломать ряды */
+  min-width: 0;
+  hyphens: auto;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 4px;
   min-height: 96px;
-  padding: 16px;
-  font-weight: 600;
+  padding: 16px 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
   text-align: center;
-  color: var(--color-muted);
   background-color: var(--color-white);
-  border: 1px dashed var(--color-muted-light);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius);
+}
+
+@media (min-width: 600px) {
+  .clients__item {
+    flex-basis: calc((100% - 32px) / 3);
+    padding: 20px 16px;
+    font-size: 1.05rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .clients__item {
+    flex-basis: calc((100% - 48px) / 4);
+  }
+}
+
+.clients__item span {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-muted);
 }
 
 .reviews {
@@ -1041,6 +1114,330 @@ textarea.field__input {
   font-size: 0.85rem;
 }
 
+/* ===== Внутренние страницы ===== */
+.nav__link[aria-current='page'] {
+  color: var(--color-accent);
+}
+
+.page-hero {
+  position: relative;
+  padding: 56px 0;
+  color: var(--color-white);
+  background: var(--color-dark) url('images/hero-bg.webp') center / cover no-repeat;
+  isolation: isolate;
+}
+
+.page-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(20, 22, 25, 0.92) 0%, rgba(20, 22, 25, 0.75) 100%);
+}
+
+@media (min-width: 768px) {
+  .page-hero {
+    padding: 80px 0;
+  }
+}
+
+.page-hero__title {
+  max-width: 760px;
+  margin-bottom: 16px;
+  font-size: clamp(2rem, 1.4rem + 2.6vw, 3rem);
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.page-hero__text {
+  max-width: 640px;
+  font-size: 1.05rem;
+  color: #e3e6ea;
+}
+
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  color: var(--color-muted-light);
+}
+
+.breadcrumbs li + li::before {
+  content: '/';
+  margin-right: 8px;
+}
+
+.breadcrumbs a:hover {
+  color: var(--color-white);
+}
+
+/* Подробный список услуг */
+.services-list {
+  display: grid;
+  gap: 24px;
+}
+
+.service {
+  display: grid;
+  overflow: hidden;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+@media (min-width: 900px) {
+  .service {
+    grid-template-columns: 2fr 3fr;
+  }
+
+  .service:nth-child(even) .service__media {
+    order: 2;
+  }
+}
+
+.service__media {
+  position: relative;
+  min-height: 220px;
+}
+
+.service__media img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+/* На десктопе фото подстраивается под высоту текста, а не растягивает карточку */
+@media (min-width: 900px) {
+  .service__media img {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    aspect-ratio: auto;
+  }
+}
+
+.service__body {
+  padding: 28px;
+}
+
+@media (min-width: 768px) {
+  .service__body {
+    padding: 40px;
+  }
+}
+
+.service__num {
+  margin-bottom: 8px;
+  font-weight: 800;
+  color: var(--color-accent);
+}
+
+.service__title {
+  margin-bottom: 12px;
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.service__text {
+  margin-bottom: 20px;
+  color: var(--color-muted);
+}
+
+.service .checklist {
+  margin-bottom: 0;
+}
+
+/* Агрегаты и материалы */
+.scope {
+  display: grid;
+  gap: 32px;
+}
+
+@media (min-width: 768px) {
+  .scope {
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+}
+
+.scope__col {
+  padding: 28px;
+  background-color: var(--color-gray);
+  border-radius: var(--radius);
+}
+
+.scope__title {
+  margin-bottom: 16px;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.placeholder-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: inherit;
+  padding: 16px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--color-muted);
+  background: repeating-linear-gradient(45deg, #eceef1 0 12px, #f5f6f8 12px 24px);
+}
+
+/* Полоса с призывом */
+.cta-band {
+  padding: 48px 0;
+  background-color: var(--color-accent);
+  color: var(--color-white);
+}
+
+.cta-band__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.cta-band__title {
+  font-size: clamp(1.4rem, 1.1rem + 1.2vw, 2rem);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.cta-band__text {
+  margin-top: 8px;
+  color: #fbe3df;
+}
+
+.btn--light {
+  background-color: var(--color-white);
+  color: var(--color-accent);
+}
+
+.btn--light:hover {
+  background-color: var(--color-dark);
+  color: var(--color-white);
+}
+
+/* Проекты: фильтр */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.filter {
+  min-height: 40px;
+  padding: 8px 18px;
+  font-weight: 600;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.filter:hover {
+  border-color: var(--color-accent);
+}
+
+.filter[aria-pressed='true'] {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-white);
+}
+
+.project[hidden] {
+  display: none;
+}
+
+/* Контакты */
+.contacts-grid {
+  display: grid;
+  gap: 24px;
+}
+
+/* Три карточки: телефон, email, адрес */
+@media (min-width: 768px) {
+  .contacts-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.contact-card {
+  padding: 24px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-top: 3px solid var(--color-accent);
+  border-radius: var(--radius);
+}
+
+.contact-card__label {
+  margin-bottom: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.contact-card__value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  word-break: break-word;
+}
+
+.contact-card__value a:hover {
+  color: var(--color-accent);
+}
+
+.contact-card__note {
+  margin-top: 4px;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+.map {
+  margin-top: 40px;
+  min-height: 360px;
+  overflow: hidden;
+  border-radius: var(--radius);
+}
+
+.requisites {
+  display: grid;
+  gap: 0;
+  max-width: 760px;
+}
+
+.requisites div {
+  display: grid;
+  gap: 4px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+@media (min-width: 600px) {
+  .requisites div {
+    grid-template-columns: 220px 1fr;
+    gap: 24px;
+  }
+}
+
+.requisites dt {
+  color: var(--color-muted);
+}
+
+.requisites dd {
+  font-weight: 600;
+}
+
 /* ===== Модальное окно ===== */
 .modal {
   width: min(460px, calc(100% - 32px));
@@ -1083,6 +1480,50 @@ textarea.field__input {
   color: var(--color-muted);
 }
 
+/* ===== Анимации ===== */
+/* Плавное появление блоков при прокрутке (классы ставит script.js) */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Ленивые картинки проявляются, а не «выпрыгивают» */
+img.is-loading {
+  opacity: 0;
+}
+
+img.is-loaded {
+  transition: opacity 0.6s var(--ease);
+}
+
+/* Открытие окна «Заказать звонок» */
+.modal[open] {
+  animation: modal-in 0.4s var(--ease);
+}
+
+.modal[open]::backdrop {
+  animation: backdrop-in 0.4s var(--ease);
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+}
+
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+}
+
 /* Уважаем настройку «меньше анимации» */
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -1093,5 +1534,6 @@ textarea.field__input {
   *::before,
   *::after {
     transition: none !important;
+    animation: none !important;
   }
 }

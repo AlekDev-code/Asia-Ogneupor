@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Проекты — выполненные работы по футеровке | ТОО «Азия-Огнеупор»</title>
+  <meta name="description"
+    content="Выполненные проекты ТОО «Азия-Огнеупор»: футеровка, ремонт и монтаж огнеупоров на металлургических предприятиях.">
+  <!-- [ЗАГЛУШКА: заменить https://example.kz на настоящий домен] -->
+  <link rel="canonical" href="https://example.kz/projects.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:site_name" content="ТОО «Азия-Огнеупор»">
+  <meta property="og:title" content="Проекты — ТОО «Азия-Огнеупор»">
+  <meta property="og:description" content="Выполненные работы по футеровке тепловых агрегатов.">
+  <meta property="og:url" content="https://example.kz/projects.html">
+  <meta property="og:image" content="https://example.kz/images/og-image.jpg">
+  <meta name="theme-color" content="#1c1f23">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="index.html" class="logo" aria-label="ТОО «Азия-Огнеупор» — на главную">
+        <img src="images/logo.webp" alt="" class="logo__img" width="177" height="50">
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Основное меню">
+        <ul class="nav__list">
+          <li><a href="index.html#about" class="nav__link">О компании</a></li>
+          <li><a href="services.html" class="nav__link">Услуги</a></li>
+          <li><a href="projects.html" class="nav__link" aria-current="page">Проекты</a></li>
+          <li><a href="contacts.html" class="nav__link">Контакты</a></li>
+        </ul>
+        <div class="nav__mobile-contacts">
+          <a href="tel:+77182654690" class="nav__phone">+7 (7182) 65-46-90</a>
+          <button type="button" class="btn btn--primary" data-modal-open="callback">Заказать звонок</button>
+        </div>
+      </nav>
+
+      <div class="header__actions">
+        <a href="tel:+77182654690" class="header__phone">
+          <svg class="icon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor"
+              d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z" />
+          </svg>
+          <span>+7 (7182) 65-46-90</span>
+        </a>
+        <button type="button" class="btn btn--primary header__btn" data-modal-open="callback">Заказать звонок</button>
+        <button type="button" class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false"
+          aria-controls="nav">
+          <span class="burger__line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <nav aria-label="Хлебные крошки">
+          <ol class="breadcrumbs">
+            <li><a href="index.html">Главная</a></li>
+            <li aria-current="page">Проекты</li>
+          </ol>
+        </nav>
+        <h1 class="page-hero__title">Выполненные проекты</h1>
+        <p class="page-hero__text">Объекты металлургических предприятий Казахстана, на которых мы выполняли монтаж
+          футеровки тепловых агрегатов.</p>
+      </div>
+    </section>
+
+    <section class="section section--gray">
+      <div class="container">
+        <!-- Фильтр по видам работ вернуть, когда появятся проекты разных категорий (см. script.js) -->
+        <ul class="projects" data-projects>
+          <li class="project" data-category="mounting">
+            <picture class="project__media">
+              <source srcset="images/project-ridder-2026.webp" type="image/webp">
+              <img src="images/project-ridder-2026.jpg" alt="Новая кирпичная футеровка вельц-печи, ТОО «Казцинк», Риддер" width="800" height="600" loading="lazy"
+                decoding="async">
+            </picture>
+            <div class="project__body">
+              <p class="project__meta">2026 · г. Риддер</p>
+              <h2 class="project__title">ТОО «Казцинк»</h2>
+              <p class="project__text">Монтаж футеровки вельц-печи.</p>
+            </div>
+          </li>
+          <li class="project" data-category="mounting">
+            <picture class="project__media">
+              <source srcset="images/project-aksu-2024.webp" type="image/webp">
+              <img src="images/project-aksu-2024.jpg" alt="Монтаж футеровки подины ДСП, Аксуский завод ферросплавов" width="800" height="600" loading="lazy"
+                decoding="async">
+            </picture>
+            <div class="project__body">
+              <p class="project__meta">2024 · г. Аксу</p>
+              <h2 class="project__title">Аксуский завод ферросплавов</h2>
+              <p class="project__text">Монтаж футеровки дуговой сталеплавильной печи (ДСП).</p>
+            </div>
+          </li>
+          <li class="project" data-category="mounting">
+            <!-- [ЗАГЛУШКА: фото объекта — пользователь положит в images/] -->
+            <div class="project__media project__media--placeholder">Фото объекта</div>
+            <div class="project__body">
+              <p class="project__meta">2019 · г. Актобе</p>
+              <h2 class="project__title">Актюбинский завод ферросплавов</h2>
+              <p class="project__text">Монтаж футеровки дуговой сталеплавильной печи (ДСП).</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="container cta-band__inner">
+        <div>
+          <h2 class="cta-band__title">Обсудим ваш объект?</h2>
+          <p class="cta-band__text">Расскажите об агрегате и задаче — предложим решение и сроки.</p>
+        </div>
+        <a href="contacts.html#request" class="btn btn--light btn--lg">Оставить заявку</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__col footer__brand">
+        <img src="images/logo.webp" alt="ТОО «Азия-Огнеупор»" class="footer__logo" width="177" height="50"
+          loading="lazy">
+        <p>Футеровка и ремонт тепловых агрегатов для металлургических предприятий.</p>
+      </div>
+      <nav class="footer__col" aria-label="Меню в подвале">
+        <p class="footer__title">Разделы</p>
+        <ul class="footer__list">
+          <li><a href="index.html#about">О компании</a></li>
+          <li><a href="services.html">Услуги</a></li>
+          <li><a href="projects.html">Проекты</a></li>
+          <li><a href="contacts.html">Контакты</a></li>
+        </ul>
+      </nav>
+      <div class="footer__col">
+        <p class="footer__title">Контакты</p>
+        <!-- [ЗАГЛУШКА: email компании] -->
+        <ul class="footer__list">
+          <li><a href="tel:+77182654690">+7 (7182) 65-46-90</a></li>
+          <li>[ЗАГЛУШКА: email]</li>
+          <li>г. Павлодар, ул. Толстого, 8, кв. 25</li>
+          <li>Время работы: с&nbsp;8:00 до&nbsp;18:00</li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__title">Реквизиты</p>
+        <ul class="footer__list">
+          <li>ТОО «Азия-Огнеупор»</li>
+          <li>БИН: 090540012851</li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <p>© <span data-year>2026</span> ТОО «Азия-Огнеупор»</p>
+      <!-- [ЗАГЛУШКА: страница политики — на этапе запуска] -->
+      <a href="#">Политика конфиденциальности</a>
+    </div>
+  </footer>
+
+  <!-- Окно «Заказать звонок» -->
+  <dialog class="modal" id="callback" aria-labelledby="callback-title">
+    <button type="button" class="modal__close" data-modal-close aria-label="Закрыть">&times;</button>
+    <h2 class="modal__title" id="callback-title">Заказать звонок</h2>
+    <p class="modal__text">Оставьте номер — перезвоним в рабочее время.</p>
+    <form class="form" data-form novalidate>
+      <label class="field">
+        <span class="field__label">Имя *</span>
+        <input class="field__input" type="text" name="name" autocomplete="name" required maxlength="100">
+        <span class="field__error" aria-live="polite"></span>
+      </label>
+      <label class="field">
+        <span class="field__label">Телефон *</span>
+        <input class="field__input" type="tel" name="phone" autocomplete="tel" required
+          placeholder="+7 (___) ___-__-__" maxlength="20">
+        <span class="field__error" aria-live="polite"></span>
+      </label>
+      <label class="checkbox">
+        <input type="checkbox" name="consent" required>
+        <span>Согласен на обработку персональных данных</span>
+      </label>
+      <span class="field__error" data-consent-error aria-live="polite"></span>
+      <button type="submit" class="btn btn--primary btn--lg form__submit">Жду звонка</button>
+      <p class="form__status" role="status"></p>
+    </form>
+  </dialog>
+</body>
+
+</html>
